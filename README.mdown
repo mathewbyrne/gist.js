@@ -1,0 +1,22 @@
+A quick jQuery plugin for asynchronously embedding a gist in an HTML document.
+
+There are a couple of ways to use it. First is the direct method that will insert it into the current position in the document:
+
+	<script>$.gist(409808)</script>
+
+Secondly, there is a more jQuery oriented method:
+
+	<div id="placeholder"></div>
+	<script>$('#placeholder').gist(409808);
+	// Or alternatively:
+	<script>$.gist(409808, '#placeholder')</script>
+
+A couple of notes:
+
+1. This works asynchronously, which has the advantage of not blocking the loading of a page. This has the slight disadvantage of "popping" in after it has loaded, but this could be alleviated with animations etc. by creating an event handler for the `gistloaded` event.
+
+2. The default gist stylesheet will not be included via this method. The URL of the stylesheet does get passed in via the 'stylesheet' key of the returned JSON, so again if desired you could catch the `gistloaded` event and pull the stylesheet out of the JSON object.
+
+3. As mentioned, after the gist has been loaded and inserted into the DOM, a `gistloaded` event is triggered on the newly created DOM object. This is to facilitate adding any custom behaviours after the gist has loaded. Potentially this could be things like animations, attaching events etc.
+
+

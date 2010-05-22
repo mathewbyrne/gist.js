@@ -1,3 +1,4 @@
+
 (function ($) {
 
 var count = 1;
@@ -15,7 +16,9 @@ $.gist = function (id, element) {
 	}
 	
 	$.getJSON(url, function (json) {
-		element.replaceWith(json.div);
+		$(json.div)
+			.replaceAll(element)
+			.trigger('gistloaded', json);
 	});
 	
 };

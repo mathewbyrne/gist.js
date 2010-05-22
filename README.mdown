@@ -19,4 +19,6 @@ A couple of notes:
 
 3. As mentioned, after the gist has been loaded and inserted into the DOM, a `gistloaded` event is triggered on the newly created DOM object. This is to facilitate adding any custom behaviours after the gist has loaded. Potentially this could be things like animations, attaching events etc.
 
+4. Currently if you specify an element to 'receive' the gist, that element is replaced, so be cautious of using it again. If you need to reuse the element, or want the element as a parent to the gist, rather than the gist itself, do something like:
 
+	$('#element').html($('<div />').gist(409808));

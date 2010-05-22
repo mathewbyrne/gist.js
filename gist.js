@@ -1,4 +1,3 @@
-
 (function ($) {
 
 var count = 1;
@@ -20,7 +19,8 @@ $.gist = function (id, element) {
 			.replaceAll(element)
 			.trigger('gistloaded', json);
 	});
-	
+		
+	return element;
 };
 
 $.fn.gist = function (id) {

@@ -1,30 +1,30 @@
+
 (function ($) {
 
 var count = 1;
 
-$.gist = function (id, element) {
+$.gist = function (id, file) {
+ 	var div = 'gist-' + id + '-' + count++
+	document.write('<div id="' + div + '"></div>');
+	$('#' + div).gist(id, file);
+};
+
+$.fn.gist = function (id, file) {
 	
-	var url = 'http://gist.github.com/' + id + '.json';
+	var url   = 'http://gist.github.com/' + id + '.json',
+		$this = $(this);
 	
-	if (!element) {
-		id  = 'gist-' + id + '-' + count++
-		document.write('<div id="' + id + '"></div>');
-		element = $('#' + id);
-	} else {
-		element = $(element);
+	if (file) {
+		url += '?file=' + file;
 	}
 	
 	$.getJSON(url, function (json) {
-		$(json.div)
-			.replaceAll(element)
-			.trigger('gistloaded', json);
-	});
-		
-	return element;
-};
-
-$.fn.gist = function (id) {
-	return $.gist(id, this);
+			$(json.div)
+				.replaceAll($this)
+				.trigger('gistloaded', json);
+		});
+	
+	return this;
 };
 
 })(jQuery);
